@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, FlatList, View } from "react-native";
 
 import { MEALS } from "../data/dummy-data";
+import MealList from "../componets/MealList";
 
 const CategoryMealsScreen = (props) => {
   const category = props.navigation.getParam("category");
@@ -10,19 +10,7 @@ const CategoryMealsScreen = (props) => {
     return meal.categoryIds.includes(category.id);
   });
 
-  const renderMealItem = (itemData) => {
-    return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
-    );
-  };
-
-  return (
-    <View style={styles.screen}>
-      <FlatList data={displayedMeals} renderItem={renderMealItem} />
-    </View>
-  );
+  return <MealList listData={displayedMeals} navigation={props.navigation} />;
 };
 
 CategoryMealsScreen.navigationOptions = (navigationData) => {
@@ -34,11 +22,3 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 };
 
 export default CategoryMealsScreen;
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
